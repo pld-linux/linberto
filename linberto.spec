@@ -7,7 +7,7 @@ Copyright:	GPL
 Source:		http://www.grigna.com/diego/linux/linberto/%{name}-%{version}.tar.gz
 Patch:		linberto-DESTDIR.patch
 URL:		http://www.grigna.com/diego/linux/linberto/
-BuildPrereq:	svgalib-devel
+BuildRequires:	svgalib-devel
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
