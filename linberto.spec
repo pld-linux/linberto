@@ -5,8 +5,6 @@ Version:	1.0.5
 Release:	2
 License:	GPL
 Group:		Applications/Games
-Group(de):	Applikationen/Spiele
-Group(pl):	Aplikacje/Gry
 Source0:	http://www.grigna.com/diego/linux/linberto/%{name}-%{version}.tar.gz
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-openscore.patch
