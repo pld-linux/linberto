@@ -8,7 +8,7 @@ Source:		http://www.grigna.com/diego/linux/linberto/%{name}-%{version}.tar.gz
 Patch:		linberto-DESTDIR.patch
 URL:		http://www.grigna.com/diego/linux/linberto/
 BuildRequires:	svgalib-devel
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 It is a jump around arcade game. Main features: nice graphics, music, sound
@@ -26,7 +26,6 @@ make -C src CCOPTS="$RPM_OPT_FLAGS" prefix=%{_prefix} \
 	CONFIGFILE=/etc/linberto.conf \
 	libdir=%{_datadir}/linberto \
 	mandir=%{_mandir}/man6
-
 
 %install
 rm -rf $RPM_BUILD_ROOT
