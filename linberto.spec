@@ -6,6 +6,7 @@ Release:	3
 License:	GPL
 Group:		Applications/Games
 Source0:	http://www.grigna.com/diego/linux/linberto/%{name}-%{version}.tar.gz
+# Source0-md5:	3ec925bb1c25043f302f51c7224bbb56
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-openscore.patch
 URL:		http://www.grigna.com/diego/linux/linberto/
