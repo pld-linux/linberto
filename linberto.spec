@@ -1,7 +1,7 @@
 Summary:	It is a jump around arcade game.
 Name:		linberto
 Version:	1.0.2
-Release:	1
+Release:	2
 Group:		Games
 Copyright:	GPL
 Source:		http://www.grigna.com/diego/linux/linberto/%{name}-%{version}.tar.gz
@@ -22,7 +22,7 @@ editor and much more.
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 make -C src CCOPTS="$RPM_OPT_FLAGS" prefix=%{_prefix} \
-	SCOREFILE=/var/state/games/linberto-scores.dat \
+	SCOREFILE=/var/lib/games/linberto-scores.dat \
 	CONFIGFILE=/etc/linberto.conf \
 	libdir=%{_datadir}/linberto \
 	mandir=%{_mandir}/man6
@@ -30,15 +30,15 @@ make -C src CCOPTS="$RPM_OPT_FLAGS" prefix=%{_prefix} \
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir},%{_mandir}/man6,/var/state/games,/etc}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir},%{_mandir}/man6,/var/lib/games,/etc}
 
 make -C src install DESTDIR=$RPM_BUILD_ROOT prefix=%{_prefix} \
-	SCOREFILE=/var/state/games/linberto-scores.dat \
+	SCOREFILE=/var/lib/games/linberto-scores.dat \
 	CONFIGFILE=/etc/linberto.conf \
 	libdir=%{_datadir}/linberto \
 	mandir=%{_mandir}/man6
 
-touch $RPM_BUILD_ROOT/var/state/games/linberto-scores.dat
+touch $RPM_BUILD_ROOT/var/lib/games/linberto-scores.dat
 touch $RPM_BUILD_ROOT/etc/linberto.conf
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man6/* doc/*.txt
@@ -52,5 +52,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(2755,root,games) %{_bindir}/*
 %{_datadir}/linberto
 %{_mandir}/man6/*
-%attr(664,root,games) /var/state/games/linberto-scores.dat
+%attr(664,root,games) /var/lib/games/linberto-scores.dat
 %attr(664,root,games) %config /etc/linberto.conf
