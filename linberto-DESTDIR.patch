@@ -1,26 +1,59 @@
-diff -ur linberto-1.0.0.orig/src/Makefile linberto-1.0.0/src/Makefile
---- linberto-1.0.0.orig/src/Makefile	Thu May  6 22:26:31 1999
-+++ linberto-1.0.0/src/Makefile	Mon Jul 19 20:16:23 1999
-@@ -110,15 +110,14 @@
- install:
- 	@echo "Installing..."
- 	@echo "Creating directories..."
--	@$(MKDIRECTORY) ${libdir}
--	@$(MKDIRECTORY) $(SNDDIR)
-+	@$(MKDIRECTORY) $(DESTDIR)${libdir}
-+	@$(MKDIRECTORY) $(DESTDIR)$(SNDDIR)
- 	@echo "Installing files..."
--	@$(INSTALL) -g root -m $(BINMODE) -o root -s ${srcdir}/$(PROGRAM) ${bindir}
--	@$(INSTALL) -g root -m 600 -o root ${srcdir}/data/$(WORLDFILE) ${libdir}
--	@$(INSTALL) -g root -m 600 -o root ${srcdir}/data/sounds/*.raw $(SNDDIR)
-+	@$(INSTALL) -s ${srcdir}/$(PROGRAM) $(DESTDIR)${bindir}
-+	@$(INSTALL) ${srcdir}/data/$(WORLDFILE) $(DESTDIR)${libdir}
-+	@$(INSTALL) ${srcdir}/data/sounds/*.raw $(DESTDIR)$(SNDDIR)
- 	@echo "Installing man page..."
--	@$(SEDBIN) $(SEDCMDS) ${docdir}/linberto.6.in > ${mandir}/linberto.6
--	@chown 0.0 ${mandir}/linberto.6
-+	@$(SEDBIN) $(SEDCMDS) ${docdir}/linberto.6.in > $(DESTDIR)${mandir}/linberto.6
- 	@echo "done."
+diff -Nur linberto-1.0.5.orig/src/Makefile linberto-1.0.5/src/Makefile
+--- linberto-1.0.5.orig/src/Makefile	Mon Feb 26 06:40:10 2001
++++ linberto-1.0.5/src/Makefile	Sat Nov  3 21:37:33 2001
+@@ -45,7 +45,7 @@
+ INSMANDIR = $(PREFIX)/man/man6
+ INSMANDIRIT = $(PREFIX)/man/it/man6
+ INSMANDIRES = $(PREFIX)/man/es/man6
+-MKMANDIR = $(INSMANDIR) $(INSMANDIRIT) $(INSMANDIRES)
++MKMANDIR = $(DESTDIR)$(INSMANDIR) $(DESTDIR)$(INSMANDIRIT) $(DESTDIR)$(INSMANDIRES)
+ LIBDIR = $(PREFIX)/lib/linberto
  
- uninstall:
-Only in linberto-1.0.0/src: Makefile~
+ #----------------------------------------------------------------------------
+@@ -185,33 +185,29 @@
+ install:
+ 	@echo $(NLS_INS_STR)
+ 	@echo $(NLS_CRE_STR)
+-	@$(MKDIR) $(INSDOCDIR)
+-	@$(MKDIR) $(LIBDIR)
+-	@$(MKDIR) $(SNDDIR)
++	@$(MKDIR) $(DESTDIR)$(INSDOCDIR)
++	@$(MKDIR) $(DESTDIR)$(LIBDIR)
++	@$(MKDIR) $(DESTDIR)$(SNDDIR)
+ 	@echo $(NLS_FIL_STR)
+-	@$(INSTALL) -g root -m $(BINMODE) -o \
+-		root -s $(SRCDIR)/$(PROGRAM) $(BINDIR)
+-	@$(INSTALL) -g root -m 600 -o root $(SRCDIR)/data/$(WORLDFILE) $(LIBDIR)
+-	@$(INSTALL) -g root -m 600 -o root $(SRCDIR)/data/sounds/*.raw $(SNDDIR)
+-	@cp -rp $(SRCDOCDIR)/. $(INSDOCDIR)
++	@$(INSTALL) $(SRCDIR)/$(PROGRAM) $(DESTDIR)$(BINDIR)
++	@$(INSTALL) $(SRCDIR)/data/$(WORLDFILE) $(DESTDIR)$(LIBDIR)
++	@$(INSTALL) $(SRCDIR)/data/sounds/*.raw $(DESTDIR)$(SNDDIR)
++	@cp -rp $(SRCDOCDIR)/. $(DESTDIR)$(INSDOCDIR)
+ 	@echo $(NLS_MAN_STR)
+ 	@$(MKDIR) $(MKMANDIR)
+ 	@$(SEDBIN) $(SEDCMDS) $(SRCMANDIR)/linberto.6.in \
+-		> $(INSMANDIR)/linberto.6
++		> $(DESTDIR)$(INSMANDIR)/linberto.6
+ 	@$(SEDBIN) $(SEDCMDS) $(SRCMANDIR)/linberto.6.in.it \
+-		> $(INSMANDIRIT)/linberto.6
++		> $(DESTDIR)$(INSMANDIRIT)/linberto.6
+ 	@$(SEDBIN) $(SEDCMDS) $(SRCMANDIR)/linberto.6.in.es \
+-		> $(INSMANDIRES)/linberto.6
+-	@chown 0.0 $(INSMANDIR)/linberto.6
+-	@chown 0.0 $(INSMANDIRIT)/linberto.6
+-	@chown 0.0 $(INSMANDIRES)/linberto.6
+-	@$(MKDIR) $(LOCALEDIR)
++		> $(DESTDIR)$(INSMANDIRES)/linberto.6
++	@$(MKDIR) $(DESTDIR)$(LOCALEDIR)
+ 	@catalogs='$(CATALOGS)'; \
+ 	for cat in $$catalogs; do \
+ 		lang=`echo $$cat | sed 's%.gmo%%'| sed 's%^.*/%%'`; \
+ 		dir=$(LOCALEDIR)/$$lang/LC_MESSAGES; \
+-		$(MKDIR) $$dir; \
+-		$(INSTALL) -m 644 $$cat $$dir/$(PACKAGE).mo; \
++		$(MKDIR) $(DESTDIR)$$dir; \
++		$(INSTALL) -m 644 $$cat $(DESTDIR)$$dir/$(PACKAGE).mo; \
+ 	done
+ 	@echo $(NLS_DON_STR)
+ 

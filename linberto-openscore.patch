@@ -1,0 +1,115 @@
+diff -Nur linberto-1.0.5.orig/src/main.c linberto-1.0.5/src/main.c
+--- linberto-1.0.5.orig/src/main.c	Sun Feb 25 21:55:14 2001
++++ linberto-1.0.5/src/main.c	Sat Nov  3 22:34:41 2001
+@@ -25,9 +25,14 @@
+ static void main_loop( void);
+ static void main_do_screen( void);
+ 
++extern FILE *scorefp;
++
+ int main( int argc, char *argv[])
+ {
+  nls_init();
++ check_if_file_exist( LINBERTO_SCOREFILE);
++ scorefp = linberto_openfile( LINBERTO_SCOREFILE, LINBERTO_SCOREFILE_DEFAULT, "r+");
++ setregid(getgid(),getgid());
+  init_svgalib();
+  init_signals();
+ 
+@@ -35,6 +40,7 @@
+ 
+  main_loop();
+ 
++ fclose(scorefp);
+  return 0;
+ }
+ 
+diff -Nur linberto-1.0.5.orig/src/score.c linberto-1.0.5/src/score.c
+--- linberto-1.0.5.orig/src/score.c	Sun Feb 25 23:56:27 2001
++++ linberto-1.0.5/src/score.c	Sat Nov  3 22:34:55 2001
+@@ -26,18 +26,16 @@
+ static void score_draw_bar( int pos, char *name);
+ static void score_move_score( FILE *fp, struct score_struct ss, long record, long maxrecord);
+ 
++FILE *scorefp;
++
+ void score_show( void)
+ {
+- FILE *fp;
+  struct stat stbuf;
+  struct score_struct ss;
+  int y;
+ 
+- check_if_file_exist( LINBERTO_SCOREFILE);
+-
+- fp = linberto_openfile( LINBERTO_SCOREFILE, LINBERTO_SCOREFILE_DEFAULT, "r");
+-
+- fstat( fileno( fp), &stbuf);
++ fseek( scorefp, 0, SEEK_SET);
++ fstat( fileno( scorefp), &stbuf);
+ 
+  gl_clearscreen( 0);
+  gl_write( 0,  0, _("  Name            Score"));
+@@ -49,14 +47,12 @@
+      for( y = 20; y < 180; y += 10)
+           gl_write( 0,  y, "  ---             0");
+  } else {
+-     while( !feof( fp) && fread( &ss, sizeof( struct score_struct), 1, fp) > 0 && y < 180) {
++     while( !feof( scorefp) && fread( &ss, sizeof( struct score_struct), 1, scorefp) > 0 && y < 180) {
+             grf_printf( 0,  y, "  %-3.3s             %ld", ss.name, ss.score);
+             y += 10;
+      }
+  }
+ 
+- fclose( fp);
+-
+  for( ; y < 180; y += 10)
+       gl_write( 0,  y, "  ---             0");
+ 
+@@ -67,7 +63,6 @@
+ 
+ void score_high_check( void)
+ {
+- FILE *fp;
+  struct stat stbuf;
+  struct score_struct ss;
+  long maxrecord;
+@@ -79,11 +74,8 @@
+  if( opt.cfg_invincible == INVINCIBLE_ON)
+      return;
+ 
+- check_if_file_exist( LINBERTO_SCOREFILE);
+-
+- fp = linberto_openfile( LINBERTO_SCOREFILE, LINBERTO_SCOREFILE_DEFAULT, "r+");
+-
+- fstat( fileno( fp), &stbuf);
++ fseek( scorefp, 0, SEEK_SET);
++ fstat( fileno( scorefp), &stbuf);
+ 
+  maxrecord = stbuf.st_size / sizeof( struct score_struct);
+ 
+@@ -94,10 +86,10 @@
+ 
+  count = 0;
+ 
+- while( !feof( fp) && fread( &ss, sizeof( struct score_struct), 1, fp) > 0 && count < 16) {
++ while( !feof( scorefp) && fread( &ss, sizeof( struct score_struct), 1, scorefp) > 0 && count < 16) {
+         if( score > ss.score) {
+-            score_enter_name( fp, count);
+-            score_move_score( fp, ss, count, maxrecord);
++            score_enter_name( scorefp, count);
++            score_move_score( scorefp, ss, count, maxrecord);
+             count = 16;
+             break;
+         }
+@@ -105,9 +97,8 @@
+  }
+ 
+  if( count < 16)
+-     score_enter_name( fp, count);
++     score_enter_name( scorefp, count);
+ 
+- fclose( fp);
+ }
+ 
+ static void score_enter_name( FILE *fp, long record)
