@@ -22,7 +22,7 @@ built in level editor and much more.
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-make -C src CCOPTS="$RPM_OPT_FLAGS" prefix=%{_prefix} \
+%{__make} -C src CCOPTS="$RPM_OPT_FLAGS" prefix=%{_prefix} \
 	SCOREFILE=/var/lib/games/linberto-scores.dat \
 	CONFIGFILE=%{_sysconfdir}/linberto.conf \
 	libdir=%{_datadir}/linberto \
@@ -33,7 +33,7 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir},%{_mandir}/man6,/var/lib/games,%{_sysconfdir}}
 
-make -C src install DESTDIR=$RPM_BUILD_ROOT prefix=%{_prefix} \
+%{__make} -C src install DESTDIR=$RPM_BUILD_ROOT prefix=%{_prefix} \
 	SCOREFILE=/var/lib/games/linberto-scores.dat \
 	CONFIGFILE=%{_sysconfdir}/linberto.conf \
 	libdir=%{_datadir}/linberto \
