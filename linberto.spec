@@ -3,10 +3,11 @@ Name:		linberto
 Version:	1.0.3
 Release:	1
 License:	GPL
-Group:		Games
-Group(pl):	Gry
+Group:		Applications/Games
+Group(de):	Applikationen/Spiele
+Group(pl):	Aplikacje/Gry
 Source0:	http://www.grigna.com/diego/linux/linberto/%{name}-%{version}.tar.gz
-Patch0:		linberto-DESTDIR.patch
+Patch0:		%{name}-DESTDIR.patch
 URL:		http://www.grigna.com/diego/linux/linberto/
 BuildRequires:	svgalib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -21,8 +22,8 @@ built in level editor and much more.
 %patch -p1
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-%{__make} -C src CCOPTS="$RPM_OPT_FLAGS" prefix=%{_prefix} \
+CFLAGS="%{rpmcflags}" LDFLAGS="%{rpmldflags}" \
+%{__make} -C src CCOPTS="%{rpmcflags}" prefix=%{_prefix} \
 	SCOREFILE=/var/lib/games/linberto-scores.dat \
 	CONFIGFILE=%{_sysconfdir}/linberto.conf \
 	libdir=%{_datadir}/linberto \
@@ -42,7 +43,7 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir},%{_mandir}/man6,/var/lib/games
 touch $RPM_BUILD_ROOT/var/lib/games/linberto-scores.dat
 touch $RPM_BUILD_ROOT%{_sysconfdir}/linberto.conf
 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man6/* doc/*.txt
+gzip -9nf doc/*.txt
 
 %clean
 rm -rf $RPM_BUILD_ROOT
