@@ -1,7 +1,7 @@
-Summary:	It is a jump around arcade game.
+Summary:	It is a jump around arcade game
 Name:		linberto
-Version:	1.0.2
-Release:	2
+Version:	1.0.3
+Release:	1
 License:	GPL
 Group:		Games
 Group(pl):	Gry
@@ -12,9 +12,9 @@ BuildRequires:	svgalib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-It is a jump around arcade game. Main features: nice graphics, music, sound
-fx, english/spanish language support, runtime help and setup, built in
-level editor and much more.
+It is a jump around arcade game. Main features: nice graphics, music,
+sound fx, english/spanish language support, runtime help and setup,
+built in level editor and much more.
 
 %prep
 %setup -q
