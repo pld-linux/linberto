@@ -2,7 +2,7 @@ Summary:	It is a jump around arcade game
 Summary(pl):	Gra polegaj±ca na skakaniu
 Name:		linberto
 Version:	1.0.5
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/Games
 Source0:	http://www.grigna.com/diego/linux/linberto/%{name}-%{version}.tar.gz
@@ -10,6 +10,7 @@ Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-openscore.patch
 URL:		http://www.grigna.com/diego/linux/linberto/
 BuildRequires:	svgalib-devel
+ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -50,7 +51,6 @@ touch $RPM_BUILD_ROOT/var/games/linberto-scores.dat
 touch $RPM_BUILD_ROOT%{_sysconfdir}/linberto.conf
 
 rm -f doc/{COPYING,INSTALL*,LSM*} doc/*/{COPYING,INST*}
-gzip -9nf doc/*.txt doc/*/*
 
 %find_lang %{name}
 
@@ -59,7 +59,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc doc/*.gz
+%doc doc/*
 %lang(es) %doc doc/es
 %lang(it) %doc doc/it
 %attr(2755,root,games) %{_bindir}/*
