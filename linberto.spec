@@ -9,7 +9,7 @@ Copyright:	GPL
 Source0:	http://www.grigna.com/diego/linux/linberto/%{name}-%{version}.tar.gz
 URL:		http://www.grigna.com/diego/linux/linberto/
 BuildPrereq:	-
-BuildRoot:   	/tmp/%{name}-%{version}-root
+BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
 It is a jump around arcade game. Main features: nice graphics, music, sound
