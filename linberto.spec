@@ -11,7 +11,6 @@ Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-openscore.patch
 URL:		http://www.grigna.com/diego/linux/linberto/
 BuildRequires:	svgalib-devel
-ExclusiveArch:	%{ix86} alpha
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
