@@ -1,6 +1,6 @@
 Summary:	It is a jump around arcade game
 Name:		linberto
-Version:	1.0.3
+Version:	1.0.5
 Release:	1
 License:	GPL
 Group:		Applications/Games
@@ -31,7 +31,6 @@ CFLAGS="%{rpmcflags}" LDFLAGS="%{rpmldflags}" \
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir},%{_mandir}/man6,/var/lib/games,%{_sysconfdir}}
 
 %{__make} -C src install DESTDIR=$RPM_BUILD_ROOT prefix=%{_prefix} \
