@@ -31,8 +31,8 @@ make
 %install
 rm -rf $RPM_BUILD_ROOT
 
-gzip -9nf $RPM_BUILD_ROOT/usr/info/*.info* \
-	$RPM_BUILD_ROOT/usr/man/man*/* \
+gzip -9nf $RPM_BUILD_ROOT%{_infodir}/*.info* \
+	$RPM_BUILD_ROOT%{_mandir}/man*/* \
 	README ChangeLog 
 
 %pre
