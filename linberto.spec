@@ -2,7 +2,7 @@ Summary:	It is a jump around arcade game
 Summary(pl):	Gra polegaj±ca na skakaniu
 Name:		linberto
 Version:	1.0.5
-Release:	4
+Release:	5
 License:	GPL
 Group:		Applications/Games
 Source0:	http://www.grigna.com/diego/linux/linberto/%{name}-%{version}.tar.gz
@@ -30,7 +30,9 @@ poziomów... i wiele innych.
 %patch1 -p1
 
 %build
-%{__make} -C src CCOPTS="%{rpmcflags}" PREFIX=%{_prefix} \
+%{__make} -C src \
+	CCOPTS="%{rpmcflags}" \
+	PREFIX=%{_prefix} \
 	SCOREFILE=/var/games/linberto-scores.dat \
 	CONFIGFILE=%{_sysconfdir}/linberto.conf \
 	LIBDIR=%{_datadir}/linberto
@@ -39,7 +41,9 @@ poziomów... i wiele innych.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir},%{_mandir}/man6,/var/games,%{_sysconfdir}}
 
-%{__make} -C src install DESTDIR=$RPM_BUILD_ROOT PREFIX=%{_prefix} \
+%{__make} -C src install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	PREFIX=%{_prefix} \
 	SCOREFILE=/var/games/linberto-scores.dat \
 	CONFIGFILE=%{_sysconfdir}/linberto.conf \
 	LIBDIR=%{_datadir}/linberto \
