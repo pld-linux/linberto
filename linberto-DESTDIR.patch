@@ -1,0 +1,26 @@
+diff -ur linberto-1.0.0.orig/src/Makefile linberto-1.0.0/src/Makefile
+--- linberto-1.0.0.orig/src/Makefile	Thu May  6 22:26:31 1999
++++ linberto-1.0.0/src/Makefile	Mon Jul 19 20:16:23 1999
+@@ -110,15 +110,14 @@
+ install:
+ 	@echo "Installing..."
+ 	@echo "Creating directories..."
+-	@$(MKDIRECTORY) ${libdir}
+-	@$(MKDIRECTORY) $(SNDDIR)
++	@$(MKDIRECTORY) $(DESTDIR)${libdir}
++	@$(MKDIRECTORY) $(DESTDIR)$(SNDDIR)
+ 	@echo "Installing files..."
+-	@$(INSTALL) -g root -m $(BINMODE) -o root -s ${srcdir}/$(PROGRAM) ${bindir}
+-	@$(INSTALL) -g root -m 600 -o root ${srcdir}/data/$(WORLDFILE) ${libdir}
+-	@$(INSTALL) -g root -m 600 -o root ${srcdir}/data/sounds/*.raw $(SNDDIR)
++	@$(INSTALL) -s ${srcdir}/$(PROGRAM) $(DESTDIR)${bindir}
++	@$(INSTALL) ${srcdir}/data/$(WORLDFILE) $(DESTDIR)${libdir}
++	@$(INSTALL) ${srcdir}/data/sounds/*.raw $(DESTDIR)$(SNDDIR)
+ 	@echo "Installing man page..."
+-	@$(SEDBIN) $(SEDCMDS) ${docdir}/linberto.6.in > ${mandir}/linberto.6
+-	@chown 0.0 ${mandir}/linberto.6
++	@$(SEDBIN) $(SEDCMDS) ${docdir}/linberto.6.in > $(DESTDIR)${mandir}/linberto.6
+ 	@echo "done."
+ 
+ uninstall:
+Only in linberto-1.0.0/src: Makefile~
