@@ -10,6 +10,7 @@ Source0:	http://www.grigna.com/diego/linux/linberto/%{name}-%{version}.tar.gz
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-openscore.patch
 URL:		http://www.grigna.com/diego/linux/linberto/
+BuildRequires:	gettext-devel
 BuildRequires:	svgalib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -71,5 +72,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man6/*
 %lang(es) %{_mandir}/es/man6/*
 %lang(it) %{_mandir}/it/man6/*
-%attr(664,root,games) %config(noreplace) %verify(not size mtime md5) /var/games/linberto-scores.dat
-%attr(664,root,games) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/linberto.conf
+%attr(664,root,games) %config(noreplace) %verify(not md5 mtime size) /var/games/linberto-scores.dat
+%attr(664,root,games) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/linberto.conf
