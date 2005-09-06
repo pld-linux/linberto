@@ -2,7 +2,7 @@ Summary:	It is a jump around arcade game
 Summary(pl):	Gra polegaj±ca na skakaniu
 Name:		linberto
 Version:	1.0.5
-Release:	5
+Release:	6
 License:	GPL
 Group:		Applications/Games
 Source0:	http://www.grigna.com/diego/linux/linberto/%{name}-%{version}.tar.gz
