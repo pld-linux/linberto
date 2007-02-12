@@ -1,5 +1,5 @@
 Summary:	It is a jump around arcade game
-Summary(pl):	Gra polegaj±ca na skakaniu
+Summary(pl.UTF-8):   Gra polegajÄ…ca na skakaniu
 Name:		linberto
 Version:	1.0.5
 Release:	6
@@ -19,11 +19,11 @@ It is a jump around arcade game. Main features: nice graphics, music,
 sound fx, English/Spanish language support, runtime help and setup,
 built in level editor and much more.
 
-%description -l pl
-To jest gra polegaj±ca na skakaniu. G³ówne zalety: przyjemna grafika,
-muzyka, efekty d¼wiêkowe, wsparcie dla jêzyka angielskiego i
-hiszpañskiego, dostêpna pomoc i konfiguracja, wbudowany edytor
-poziomów... i wiele innych.
+%description -l pl.UTF-8
+To jest gra polegajÄ…ca na skakaniu. GÅ‚Ã³wne zalety: przyjemna grafika,
+muzyka, efekty dÅºwiÄ™kowe, wsparcie dla jÄ™zyka angielskiego i
+hiszpaÅ„skiego, dostÄ™pna pomoc i konfiguracja, wbudowany edytor
+poziomÃ³w... i wiele innych.
 
 %prep
 %setup -q
