@@ -1,5 +1,5 @@
 Summary:	It is a jump around arcade game
-Summary(pl.UTF-8):   Gra polegająca na skakaniu
+Summary(pl.UTF-8):	Gra polegająca na skakaniu
 Name:		linberto
 Version:	1.0.5
 Release:	6
