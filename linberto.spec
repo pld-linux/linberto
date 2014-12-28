@@ -10,7 +10,7 @@ Source0:	http://www.grigna.com/diego/linux/linberto/%{name}-%{version}.tar.gz
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-openscore.patch
 URL:		http://www.grigna.com/diego/linux/linberto/
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	svgalib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
